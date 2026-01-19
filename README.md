@@ -1,138 +1,112 @@
-<div align="center">
-  <h1>Git Cards - Architecture Showcase</h1>
-  <p>
-    <strong>Micro-SaaS para personalização de perfis GitHub com assets SVG dinâmicos.</strong>
-  </p>
-  <img src="./src/banner.png" >
-  <p>
-    <a href="https://gitcards.victorlisbronzo.me/">
-      <img src="https://img.shields.io/static/v1?label=Project&message=GitCards&color=1a1a2e&style=for-the-badge&logo=ghost" alt="GitCards" />
-    </a>
-  </p>
+# 🔮 GitCards Showcase
 
-  <p>
-    <a href="#-o-produto">O Produto</a> •
-    <a href="#-arquitetura-e-engenharia">Engenharia</a> •
-    <a href="#-stack-tecnologica">Stack</a> •
-    <a href="#-decisoes-tecnicas">Decisões Técnicas</a>
-  </p>
+> A plataforma definitiva para desenvolvedores criarem, personalizarem e compartilharem seus "Developer Cards" dinâmicos.
+
+<div align="center">
+
+<br />
+
+<a href="https://gitcards.victorlisbronzo.me/">
+  <img src="https://img.shields.io/static/v1?label=&message=Ver%20Demo%20Online&color=8257e5&style=for-the-badge&logo=vercel" alt="Ver Demo Online" />
+</a>
+&nbsp;
+<a href="https://victorlisbronzo.me/">
+  <img src="https://img.shields.io/static/v1?label=&message=Portf%C3%B3lio%20do%20Desenvolvedor&color=2e2e2e&style=for-the-badge&logo=github" alt="Portfólio" />
+</a>
+&nbsp;
+<a href="https://linkedin.com/in/victor-lis-bronzo">
+  <img src="https://img.shields.io/static/v1?label=&message=Entrar%20em%20Contato&color=0077b5&style=for-the-badge&logo=linkedin" alt="Entrar em Contato" />
+</a>
+
 </div>
 
-> ⚠️ **Nota:** Este repositório é um Showcase Público de um projeto privado. Ele contém a documentação arquitetural, diagramas e explicação das decisões técnicas. O código-fonte original é mantido em um repositório privado para proteção de propriedade intelectual.
+## 🎯 Parte 1: O Produto
 
-## 🚀 O Produto
+### O que é o GitCards?
 
-### O Problema
+O GitCards é uma aplicação Full-Stack SaaS que permite a desenvolvedores transformarem seus dados do GitHub e Tech Stack em cartões visuais de alto impacto. Esses "cards" são gerados dinamicamente e otimizados para serem compartilhados em redes sociais (LinkedIn, Twitter) ou incorporados diretamente no README.md de seus perfis.
 
-O perfil do GitHub é o currículo moderno do desenvolvedor. No entanto, a maioria dos arquivos README.md de perfil são estáticos, limitados a textos e listas simples, falhando em capturar a personalidade ou as métricas reais do desenvolvedor.
+### 🌟 Funcionalidades & Fluxo
 
-### A Solução: GitCards
+A aplicação não é apenas um gerador de imagens; é um ecossistema completo com economia interna:
 
-O GitCards é uma plataforma que permite a desenvolvedores adquirirem e personalizarem Cards SVG Premium. Estes cards não são apenas imagens; são componentes projetados para se integrarem perfeitamente ao modo escuro/claro do GitHub, exibindo informações com estética de alto nível.
+- **Marketplace de Templates:** Uma loja onde designers podem disponibilizar layouts e usuários podem adquiri-los.
+- **Sistema de Créditos:** Integração financeira real. Usuários compram "Pacotes de Créditos" (microtransações) para desbloquear templates premium.
+- **Editor WYSIWYG:** Customização em tempo real das cores, fontes, dados e visibilidade dos elementos do card.
+- **Autenticação Moderna:** Login sem senha (Magic Link) e validação via códigos OTP enviados por e-mail.
 
-### Funcionalidades Chave
+<div align="center">
+  <h3>✨ Experimente agora:</h3>
+  <a href="https://gitcards.victorlisbronzo.me/">
+    <img src="https://img.shields.io/badge/Acessar_Aplicação_Agora-8257e5?style=for-the-badge" alt="Link para o projeto" />
+  </a>
+</div>
 
-- 🛍️ **Marketplace de Assets:** Uma loja virtual onde usuários podem navegar por templates exclusivos.
-- 🎨 **Customização em Tempo Real:** Editor WYSIWYG para alterar cores, textos e ícones dos cards antes da compra.
-- ⚡ **Entrega Dinâmica:** O sistema gera URLs únicas para cada asset adquirido, servindo SVGs otimizados via CDN/API.
-- 💳 **Sistema de Créditos:** Integração com Mercado Pago para compra de pacotes de créditos.
-- 🔐 **Autenticação Híbrida:** Login via Magic Link e gerenciamento de perfil seguro.
+## 🏗️ Parte 2: Engenharia & Arquitetura
 
-## 🏗️ Arquitetura e Engenharia
+> 💡 **Nota Técnica:** Como o código-fonte é proprietário, esta seção detalha as decisões arquiteturais de alto nível que garantem escalabilidade, segurança e manutenibilidade.
 
-Este projeto foi construído sobre uma arquitetura de Monorepo (TurboRepo), focada em performance, type-safety estrita e separação de responsabilidades.
+### ⚡ Tech Stack
 
-### Diagrama de Alto Nível
+| Camada | Tecnologia Principal | Por que foi escolhida? |
+| :--- | :--- | :--- |
+| **Core** | Turborepo (Monorepo) | Gerenciamento centralizado de pacotes, linting e build cacheado. |
+| **Frontend** | Next.js 14 (App Router) | Renderização híbrida (SSR para SEO, CSR para o Editor) e performance. |
+| **Backend** | Node.js + Fastify | Baixo overhead e alta taxa de requests por segundo (RPS) para a API. |
+| **Database** | PostgreSQL + Prisma | Integridade relacional robusta e Developer Experience (DX) superior. |
+| **Tipagem** | TypeScript + Zod | Validação de dados em runtime e time-to-market seguro. |
+| **Infra** | Docker + Nginx | Containerização completa e proxy reverso para produção. |
+
+### 📐 Arquitetura: End-to-End Type Safety
+
+O diferencial técnico deste projeto é o compartilhamento estrito de contratos de dados entre Frontend e Backend.
 
 ```mermaid
-graph TD
-    User[Usuário / GitHub] -->|HTTPS| Nginx[Nginx Proxy Reverso]
-    
-    subgraph Infrastructure [Docker Containers]
-        Nginx -->|/api/*| API[Node.js API (Fastify)]
-        Nginx -->|/*| Web[Next.js App (Frontend)]
-        
-        API -->|Read/Write| DB[(PostgreSQL)]
-        API -->|Transacional| MP[Mercado Pago API]
-        API -->|Transactional Emails| Resend[Resend API]
-    end
-    
-    Web -.->|Shared Types| Packages[Shared Packages (@gitcards/schemas)]
-    API -.->|Shared Types| Packages
+graph LR
+    A[Frontend Next.js] -- Importa Tipos --> B((Shared Packages))
+    C[Backend Node.js] -- Importa Tipos --> B
+    B -- Zod Schemas --> A
+    B -- Zod Schemas --> C
+    D[Database] -- Prisma Client --> C
 ```
-
-### 📂 Estrutura do Monorepo
-
-A organização do código segue o padrão de workspaces do PNPM/TurboRepo:
-
-- `/nextjs`: Aplicação Frontend (App Router). Responsável pela UI, Dashboard do Usuário, Marketplace e Editor.
-- `/nodejs`: API Backend (Fastify). Responsável pela lógica de negócios, geração de SVGs, Webhooks de pagamento e Auth.
-- `/packages`: Bibliotecas internas compartilhadas.
-  - `schemas`: O "coração" da tipagem. Contém todos os schemas Zod que são usados tanto pelo Frontend (validação de formulários) quanto pelo Backend (validação de rotas e tipagem de resposta).
-- `/nginx`: Configuração do Proxy Reverso e Certbot para SSL.
-
-## 🛠️ Stack Tecnológica
-
-### Backend (Performance First)
-
-- **Runtime:** Node.js
-- **Framework:** Fastify (Escolhido pela baixa sobrecarga e performance superior ao Express).
-- **ORM:** Prisma (PostgreSQL).
-- **Validação:** Zod (integração nativa com fastify-type-provider-zod).
-- **Pagamentos:** SDK Mercado Pago.
-- **Emails:** Resend.
-
-### Frontend (User Experience)
-
-- **Framework:** Next.js 15 (App Router).
-- **Estilização:** Tailwind CSS v4 + Shadcn/ui + Lucide Icons.
-- **State Management:** TanStack Query (React Query) para gerenciamento de estado assíncrono e cache.
-- **Forms:** React Hook Form + Zod Resolvers.
-
-### DevOps & Infra
-
-- **Containerização:** Docker & Docker Compose.
-- **Build System:** TurboRepo (para cacheamento de builds e execução paralela).
-- **Proxy:** Nginx (gerenciando domínios da API e da Web).
-
-## 💡 Decisões Técnicas (ADRs)
-
-### 1. Single Source of Truth para Tipagem
-
-- **Decisão:** Em vez de duplicar interfaces TypeScript no Frontend e no Backend, criei um pacote interno `@gitcards/packages`.
-- **Benefício:** Se eu altero um campo no banco de dados, eu atualizo o schema Zod neste pacote. Imediatamente, o Backend sabe que precisa validar esse campo e o Frontend sabe que o formulário precisa desse input. Isso elimina 90% dos bugs de integração.
-
-### 2. Fastify vs. Next.js API Routes
-
-- **Decisão:** Separei o Backend em um serviço Node.js dedicado com Fastify, em vez de usar as API Routes do Next.js.
-- **Motivo:**
-  - **Escalabilidade:** O serviço de geração e entrega de SVGs precisa ser extremamente rápido e pode escalar independentemente do Frontend.
-  - **Arquitetura Limpa:** O Fastify permite uma estrutura de injeção de dependência e separação de Services/Controllers mais robusta para lógicas complexas (como os webhooks de pagamento e geração de auth codes).
-
-### 3. Sistema de Autenticação Customizado
-
-- **Decisão:** Implementação de um sistema de Auth baseado em JWT e códigos OTP (Magic Links/Codes) via email.
-- **Motivo:** Reduzir a fricção de entrada (passwordless) e ter controle total sobre a sessão do usuário e verificação de conta, mantendo a segurança com tokens de curta duração e refresh tokens.
-
-### 4. Geração de Assets
-
-Os cards não são gerados no momento da requisição (SSR pesado). Eles são templates SVG manipulados com base nos dados do usuário e servidos de forma otimizada.
 
 ## 📸 Galeria (Mockups)
 
 ### Marketplace
-Vitrine de cards disponíveis
+> Vitrine de cards disponíveis para compra e personalização.
+
+![MarketPlace](./src/marketplace.png)
 
 ### Customização
-Editor visual com preview em tempo real
+> Editor visual com preview em tempo real e ajustes finos.
+
+![Customization](./src/customization.png)
 
 ## 👨‍💻 Autor
 
-**Victor Lis**
-Software Engineer & Content Creator
+<div align="center">
 
+<img src="https://github.com/victor-lis.png" width="100px;" alt=""/>
+<br />
+<sub><b>Victor Lis</b></sub>
+<br />
+
+Software Engineer & Content Creator
+<br />
 Focado em criar experiências digitais de alta performance e arquiteturas escaláveis.
 
-<p align="center">
+<br />
+
+<a href="https://linkedin.com/in/victor-lis-bronzo" target="_blank">
+<img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"></a> 
+<a href="https://github.com/victor-lis" target="_blank">
+<img src="https://img.shields.io/badge/-GitHub-gray?style=for-the-badge&logo=github&logoColor=white" target="_blank"></a>
+
+<br />
+<br />
+<p>
   Feito com 💜 e TypeScript.
 </p>
+
+</div>
+
