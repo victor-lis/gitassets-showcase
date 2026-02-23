@@ -1,219 +1,144 @@
-# 🔮 Git Cards - Showcase
+# 🛠️ Git Assets
 
-> A plataforma definitiva para desenvolvedores criarem, personalizarem e compartilharem seus "Developer Cards" dinâmicos.
+![Git Assets Showcase](./assets/home.png)
 
-<div align="center">
+> **Git Assets** — Assets visuais e componentes para desenvolvedores exigentes que querem destacar seus perfis e README no GitHub.  
+> Tudo que você precisa para documentações mais ricas e profissionais. 🌟 
 
-<br />
+---
 
-<a href="https://gitcards.victorlisbronzo.me/">
-  <img src="https://img.shields.io/static/v1?label=&message=Ver%20Demo%20Online&color=8257e5&style=for-the-badge&logo=vercel" alt="Ver Demo Online" />
-</a>
-&nbsp;
-<a href="https://victorlisbronzo.me/">
-  <img src="https://img.shields.io/static/v1?label=&message=Portf%C3%B3lio%20do%20Desenvolvedor&color=2e2e2e&style=for-the-badge&logo=github" alt="Portfólio" />
-</a>
-&nbsp;
-<a href="https://linkedin.com/in/victor-lis-bronzo">
-  <img src="https://img.shields.io/static/v1?label=&message=Entrar%20em%20Contato&color=0077b5&style=for-the-badge&logo=linkedin" alt="Entrar em Contato" />
-</a>
+## 📌 Índice
 
-</div>
+- [Sobre](#sobre)
+- [Demonstração](#demonstração)
+- [Funcionalidades](#funcionalidades)
+- [Tecnologias usadas](#tecnologias-usadas)
+- [Como usar](#como-usar)
+- [Links importantes](#links-importantes)
+- [Contribuições](#contribuições)
+- [Licença](#licença)
+- [Autor](#autor)
 
-## 🎯 Parte 1: O Produto
+---
 
-### O que é o GitCards?
+## 🚀 Sobre
 
-O GitCards é uma aplicação Full-Stack SaaS que permite a desenvolvedores transformarem seus dados do GitHub e Tech Stack em cartões visuais de alto impacto. Esses "cards" são gerados dinamicamente e otimizados para serem compartilhados em redes sociais (LinkedIn, Twitter) ou incorporados diretamente no README.md de seus perfis.
+Uma plataforma que oferece **assets visuais reutilizáveis** fáceis de integrar em seus projetos e perfis GitHub, com foco em melhorar a apresentação e destacar seu trabalho profissional.
+---
 
-### 🌟 Funcionalidades & Fluxo
+## 💡 Como surgiu a ideia?
 
-A aplicação não é apenas um gerador de imagens; é um ecossistema completo com economia interna:
+Sempre gostei de personalizar meu perfil do GitHub e README, mas sentia que faltava algo mais profissional e visual. As principais soluções eram APIs limitadas e cheias de parâmetros, que tornava a experiência um pouco frustrante. Então, decidi criar o **Git Assets** para oferecer uma solução mais simples, visual e fácil de usar, com uma variedade de componentes de fácil edição e integração.
 
-- **Marketplace de Templates:** Uma loja onde designers podem disponibilizar layouts e usuários podem adquiri-los.
-- **Sistema de Créditos:** Integração financeira real. Usuários compram "Pacotes de Créditos" (microtransações) para desbloquear templates premium.
-- **Editor WYSIWYG:** Customização em tempo real das cores, fontes, dados e visibilidade dos elementos do card.
-- **Autenticação Moderna:** Login sem senha (Magic Link) e validação via códigos OTP enviados por e-mail.
+## 📸 Demonstração
 
-<div align="center">
-  <h3>✨ Experimente agora:</h3>
-  <a href="https://gitcards.victorlisbronzo.me/">
-    <img src="https://img.shields.io/badge/Acessar_Aplicação_Agora-8257e5?style=for-the-badge" alt="Link para o projeto" />
-  </a>
-</div>
+> (Aqui você pode inserir **uma imagem ou GIF** do seu projeto funcionando — por exemplo uma captura da página principal ou cards sendo usados)
 
-## 🏗️ Parte 2: Engenharia & Arquitetura
+![Git Assets Showcase](./assets/demo.gif)
 
-> 💡 **Nota Técnica:** Como o código-fonte é proprietário, esta seção detalha as decisões arquiteturais de alto nível que garantem escalabilidade, segurança e manutenibilidade.
+---
 
-### ⚡ Tech Stack
+## ✨ Funcionalidades
 
-| Camada | Tecnologia Principal | Por que foi escolhida? |
-| :--- | :--- | :--- |
-| **Core** | Turborepo (Monorepo) | Gerenciamento centralizado de pacotes, linting e build cacheado. |
-| **Frontend** | Next.js 14 (App Router) | Renderização híbrida (SSR para SEO, CSR para o Editor) e performance. |
-| **Backend** | Node.js + Fastify | Baixo overhead e alta taxa de requests por segundo (RPS) para a API. |
-| **Database** | PostgreSQL + Prisma | Integridade relacional robusta e Developer Experience (DX) superior. |
-| **Tipagem** | TypeScript + Zod | Validação de dados em runtime e time-to-market seguro. |
-| **Infra** | Docker + Nginx | Containerização completa e proxy reverso para produção. |
+- 🎨 Componentes visuais para README, portfólios e documentações.
+- 🔍 Busca e visualização de assets.
+- 📊 Cards para destacar habilidades, linguagens e projetos.
+- 📦 Sistema de créditos flexível para compra e uso de assets.
 
-### 📐 Arquitetura: End-to-End Type Safety
+---
 
-O diferencial técnico deste projeto é o compartilhamento estrito de contratos de dados entre Frontend e Backend.
+## 🛠️ Stack & Arquitetura
 
-```mermaid
-graph LR
-    A[Frontend Next.js] -- Importa Tipos --> B((Shared Packages))
-    C[Backend Node.js] -- Importa Tipos --> B
-    B -- Zod Schemas --> A
-    B -- Zod Schemas --> C
-    D[Database] -- Prisma Client --> C
-```
+### 🚀 Tecnologias Principais
 
-### 📐 Arquitetura Antiga
+- **Next.js** (App Router + Server Actions)
+- **Node.js**
+- **PostgreSQL**
+- **TypeScript**
+- **Prisma ORM**
+- **Fastify**
+- **pnpm workspaces**
+- **Turborepo**
 
-```mermaid
-sequenceDiagram
-    autonumber
-    actor User as 👤 Usuário
-    box "Frontend (Next.js)" #000000
-        participant Page as Page/Component
-        participant Hook as React Query Hook<br/>(useGetUserCard)
-        participant Client as API Client<br/>(Axios)
-    end
-    box "Backend (Node.js/Fastify)" #333333
-        participant Route as Fastify Route<br/>(Controller)
-        participant Service as Business Service<br/>(UserCardService)
-        participant Prisma as Prisma ORM
-    end
-    participant DB as PostgreSQL
+---
 
-    Note over User, DB: 🚀 Início do Fluxo de Leitura (Ex: Get Card)
+## 🧱 Arquitetura
 
-    User->>Page: Acessa a página de detalhes
-    Page->>Hook: Chama hook useGetUserCard(id)
-    activate Hook
-    Hook->>Client: Executa função de fetch
-    Client->>Route: HTTP GET /user-cards/:id
-    activate Route
+> Monorepo modular com foco em performance, isolamento de responsabilidades e reutilização de regras de negócio.
 
-    Note right of Client: Validação de Auth (JWT)<br/>via Middleware
+A arquitetura foi projetada para extrair o máximo do potencial do **Next.js no server-side**, priorizando performance e organização estrutural.
 
-    Route->>Route: Valida Params com Zod
-    Route->>Service: Chama UserCardService.findById(id)
-    activate Service
+Na versão anterior do projeto, todas as conexões com o banco eram feitas exclusivamente via API. Isso tornava o uso do Next.js subaproveitado. Então eu poderia apenas criar uma aplicação React tradicional.
 
-    Service->>Prisma: prisma.userCard.findUnique()
-    activate Prisma
-    Prisma->>DB: Query SQL
-    DB-->>Prisma: Retorna dados brutos
-    deactivate Prisma
+Com isso em mente, reestruturei o sistema para uma abordagem **modular e orientada a domínio**, utilizando **pnpm workspaces** e **Turborepo**, permitindo:
 
-    Service->>Service: Valida retorno com Zod Schema
-    Service-->>Route: Retorna Objeto UserCard
-    deactivate Service
+- Desenvolvimento independente por pacote
+- Reutilização centralizada das regras de negócio
+- Tipagem compartilhada em toda a aplicação
+- Escalabilidade limpa e previsível
 
-    Route-->>Client: HTTP 200 OK (JSON)
-    deactivate Route
+---
 
-    Client-->>Hook: Resolve Promise com dados
-    Hook-->>Page: Atualiza estado (data, isLoading)
-    deactivate Hook
-    
-    Page-->>User: Renderiza o Card SVG na tela
-```
+## 📦 Estrutura do Monorepo
 
-### 🔄 Arquitetura e Fluxo de Dados
+### `database`
+- Conexão com **PostgreSQL**
+- Prisma ORM
+- Configuração e gerenciamento de schema
 
-```mermaid
-sequenceDiagram
-    autonumber
-    actor User as 👤 Usuário
-    box "Client Side (Browser)" #000000
-        participant UI as 🖥️ UI Component
-    end
-    box "Server Side (Next.js Runtime)" #222222
-        participant Action as ⚡ Server Action
-        participant Service as 🧠 Service (Importado)
-        participant ORM as 🔌 Prisma Client
-    end
-    participant DB as 🐘 PostgreSQL
+### `packages`
+- DTOs
+- Schemas de validação
+- Tipagem compartilhada
 
-    Note over User, DB: ⚡ Fluxo Otimizado (Zero HTTP Interno)
+### `core`
+- Regras de negócio
+- Lógica principal da aplicação
+- Camada independente de framework
 
-    User->>UI: Interação (Click / Submit)
-    UI->>Action: Invoca Server Action (RPC)
-    activate Action
+### `api`
+- Rotas com **Fastify**
+- Webhooks (ex: Mercado Pago)
+- Serviços isolados da camada web
 
-    Note right of Action: 🔒 Auth Check (Session)<br/>✅ Validação Zod (Input)
+> Poderia utilizar as rotas do próprio Next.js, inclusive com Fastify,
+> mas optei pelo isolamento estratégico da API.
 
-    Action->>Service: await UserCardService.get(id)
-    activate Service
+### `web`
+- Interface com **Next.js**
+- Uso intensivo de **Server Actions**
+- Arquitetura com **Compound Components**
+- Foco em performance e UX
 
-    Note right of Service: 📦 Execução direta em memória<br/>(Sem serialização HTTP JSON)
+---
 
-    Service->>ORM: prisma.userCard.findUnique()
-    activate ORM
-    ORM->>DB: SQL Query
-    DB-->>ORM: Result Set
-    deactivate ORM
+## 🎯 Decisões Arquiteturais
 
-    Service-->>Action: Retorna Objeto/DTO
-    deactivate Service
+- Priorizar **server-side rendering e performance**
+- Separar regras de negócio da camada de framework
+- Evitar acoplamento entre web e lógica principal
+- Manter tipagem única e consistente em todo o sistema
+- Facilitar testes e futura escalabilidade
 
-    Note left of Action: 💾 Opcional: Cachear com<br/>unstable_cache() aqui
+Já queria há um tempo trabalhar com a integração de pacotes do node, e o Turborepo foi uma descoberta que fiz nesse procesos. Gostei muito das características desse projeto, além de práticar a arquitetura de monorepo, acabei realmente achando uma boa prática esse isolamento para testes e manutenção.
 
-    Action-->>UI: Retorna Payload Serializado
-    deactivate Action
+---
 
-    UI-->>User: Atualiza Interface
-```
+## 📋 Como usar
+Basta acessar a plataforma em [`https://gitassets.victorlisbronzo.me`](https://gitassets.victorlisbronzo.me), criar uma conta, adquirir os assets desejados e seguir as instruções para integrar em seus perfis ou projetos. 
 
-### 📂 Estrutura do Projeto (Detalhada)
+---
 
-- `/nextjs`: Aplicação Frontend (Loja e Dashboard).
-- `/nodejs`: API RESTful (Gerenciamento de usuários, compras e entrega de assets).
-- `/packages`: Bibliotecas compartilhadas (Schemas Zod, Tipos).
-- `/nginx`: Configurações de proxy reverso.
+## 🔗 Links importantes
+- 🌐 Website: https://gitassets.victorlisbronzo.me/
+- 📄 Documentação adicional: https://gitassets.victorlisbronzo.me/docs
 
+---
 
-## 📸 Galeria (Mockups)
+## 🤝 Contribuições
+Contribuições são bem-vindas! Ideias ou sugestões? Pode enviar um email para [victorlisbronzo1@gmail.com](mailto:victorlisbronzo1@gmail.com)
 
-### Marketplace
-> Vitrine de cards disponíveis para compra e personalização.
-
-![MarketPlace](./src/marketplace.png)
-
-### Customização
-> Editor visual com preview em tempo real e ajustes finos.
-
-![Customization](./src/customization.png)
+---
 
 ## 👨‍💻 Autor
-
-<div align="center">
-
-<img src="https://github.com/victor-lis.png" width="100px;" alt=""/>
-<br />
-<sub><b>Victor Lis</b></sub>
-<br />
-
-Software Engineer & Content Creator
-<br />
-Focado em criar experiências digitais de alta performance e arquiteturas escaláveis.
-
-<br />
-
-<a href="https://linkedin.com/in/victor-lis-bronzo" target="_blank">
-<img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"></a> 
-<a href="https://github.com/victor-lis" target="_blank">
-<img src="https://img.shields.io/badge/-GitHub-gray?style=for-the-badge&logo=github&logoColor=white" target="_blank"></a>
-
-<br />
-<br />
-<p>
-  Feito com 💜 e TypeScript.
-</p>
-
-</div>
-
+[Victor Lis Bronzo](https://victorlisbronzo.me) — Desenvolvedor Full-Stack e criador do Git Assets.
