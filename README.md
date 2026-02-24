@@ -38,12 +38,9 @@ Sempre gostei de personalizar meu perfil do GitHub e README, mas sentia que falt
 
 ---
 
-## ✨ Funcionalidades
-
-- 🎨 Componentes visuais para README, portfólios e documentações.
-- 🔍 Busca e visualização de assets.
-- 📊 Cards para destacar habilidades, linguagens e projetos.
-- 📦 Sistema de créditos flexível para compra e uso de assets.
+<div align="center">
+  <img src="https://gitassets.victorlisbronzo.me/api/card/cmm0n5x79000m0iprcxfsbzwf?v=htxsx4" alt="Principais Pilares do GitAssets" width="100%" />
+</div>
 
 ---
 
@@ -110,6 +107,14 @@ Com isso em mente, reestruturei o sistema para uma abordagem **modular e orienta
 - Arquitetura com **Compound Components**
 - Foco em performance e UX
 
+<br/>
+<br/>
+
+<img 
+  src="https://gitassets.victorlisbronzo.me/api/card/cmm0nb4dp000n0ipr2xrg6v1i?v=rvwlug" alt="Arquitetura do Monorepo: Web, API, Core e Database" 
+  width="100%" 
+/>
+
 ---
 
 ## 🎯 Decisões Arquiteturais
@@ -141,4 +146,6 @@ Contribuições são bem-vindas! Ideias ou sugestões? Pode enviar um email para
 ---
 
 ## 👨‍💻 Autor
-[Victor Lis Bronzo](https://victorlisbronzo.me) — Desenvolvedor Full-Stack e criador do Git Assets.
+  <img 
+    src="https://gitassets.victorlisbronzo.me/api/card/cmm0ns5e0000p0iprt7eonzqy?v=buweex" alt="Criado por Victor Lis Bronzo" width="100%" 
+  />
